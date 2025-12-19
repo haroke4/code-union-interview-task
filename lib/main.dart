@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:stock_investment_app/features/stock/di.dart';
+import 'package:stock_investment_app/router/app_router/app_router.dart';
 
 void main() {
+  // Initialize dependency injection
+  setupStockFeatureDI();
+
   runApp(const MyApp());
 }
 
@@ -9,13 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Stock Investment',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      routerConfig: appRouter.config(),
     );
   }
 }
@@ -38,4 +43,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-} 
+}
