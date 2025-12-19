@@ -190,4 +190,3 @@ class MockStockRepo implements StockRepo {
     }
   }
 }
-
