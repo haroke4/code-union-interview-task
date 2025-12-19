@@ -10,6 +10,7 @@ class StockCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
+        spacing: 16,
         children: [
           // image
           Container(
@@ -19,8 +20,38 @@ class StockCard extends StatelessWidget {
               color: Colors.grey,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.network(stock.logo, fit: BoxFit.contain),
+            child: Image.network(
+              stock.logo,
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.error);
+              },
+            ),
           ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(stock.stockName),
+                Text(stock.companyName),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('${stock.priceInUsd} USD'),
+              Text(
+                '${stock.priceChangeInPercent.toString()}%',
+                style: TextStyle(
+                  color: stock.priceChangeInPercent > 0
+                      ? Colors.green
+                      : Colors.red,
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
